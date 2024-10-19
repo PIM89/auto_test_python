@@ -1,4 +1,5 @@
 import subprocess
+import os
 
 def check_command(command, text):
     process_exec_command = subprocess.run(command, stdout=subprocess.PIPE)
@@ -11,5 +12,8 @@ def check_command(command, text):
     else:
         print("Fail")
 
-check_command('pwd', "pim")
+environ = os.environ
+env = environ.get('HOME')
+
+check_command('pwd', env)
 check_command('ls', "pim")
