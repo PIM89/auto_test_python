@@ -7,9 +7,9 @@ def check_command(command, text):
     out_exec_command = process_exec_command.stdout
 
     if text in out_exec_command and out_code == 0:
-        print("Success")
+        return True
     else:
-        print("Fail")
+        return False
 
 environ = os.environ
 env = environ.get('HOME')
