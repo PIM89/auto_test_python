@@ -11,6 +11,10 @@ def checkout(cmd, text):
         return False
 
 
+folder_in = "/home/zerg/tst"
+folder_out = "/home/zerg/out"
+
+
 @pytest.fixture(autouse=True, scope='module')
 def before_step_tests():
     subprocess.run('cd /home/; mkdir zerg; cd zerg/; mkdir tst out; echo test >> tst/test.txt', encoding='utf-8',
@@ -30,3 +34,12 @@ def test_step2():
 
 def test_step3():
     assert checkout("cd /home/zerg/out; 7z t arx2.7z", "Everything is Ok"), "test_step3 fail"
+
+
+def test_step4():
+    assert checkout("cd {}; echo upgrade_file >> test.txt; cd {}; 7z u arx2.7z".format(folder_in, folder_out),
+                    "Everything is Ok"), "test_step4 fail"
+
+def test_step5():
+    assert checkout("cd {}; 7z d arx2.7z".format(folder_out),
+                    "Everything is Ok"), "test_step5 fail"
