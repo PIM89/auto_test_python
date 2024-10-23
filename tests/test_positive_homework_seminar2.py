@@ -38,6 +38,8 @@ def test_7z_check_path():
     res_view_file2 = checkout_positive("cd {}; 7z l arx2.7z".format(folder_out), "folder/test2.txt")
     assert res_view_file2, "test_7z_check_path fail"
 
+# Доработать проект, добавив тест команды расчёта хеша (h). Проверить, что хеш совпадает с рассчитанным командой crc32.
+
 def test_7z_hash():
     res_crc32 = subprocess.run("cd {}; crc32 arx2.7z".format(folder_out), shell=True, encoding="utf-8", stdout=subprocess.PIPE)
     res_compare_hash = checkout_positive("cd {}; 7z h arx2.7z".format(folder_out), res_crc32.stdout.upper())
